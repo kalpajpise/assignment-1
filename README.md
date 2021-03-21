@@ -54,6 +54,8 @@ redis-server (default port 6379, host - 127.0.0.1) # Initialize the redis server
 
 python3 run.py # Automated scripts install requirements 
 ```
+Run Client Server on port 80 <br>
+Run  Query Server on port 8000<br>
 
 For Window Operating System
 ```cmd
