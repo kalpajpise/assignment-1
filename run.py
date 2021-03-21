@@ -9,14 +9,15 @@ start_time = time.time()
 TERMINAL_WIDTH = shutil.get_terminal_size((80, 20)).columns
 BASE_URL_SERVER1 = 'http://127.0.0.1:8000/api/'
 BASE_URL_SERVER2 = 'http://127.0.0.1:80/api/'
+flavour = platform.system()
+cmd = ['python', 'pip'] if flavour == 'Windows' else ['python3', 'pip3']
+
 
 def main():
-
-
     print("Installing packages".center(TERMINAL_WIDTH, "-"))
-    os.system("pip install -r requirements.txt")
+    os.system("{} install -r requirements.txt".format(cmd[1]))
 
-    print("Setting up Query Server - Flask Server".center(TERMINAL_WIDTH,'-'))
+    print("Setting up Query Server - Flask Server".center(TERMINAL_WIDTH, '-'))
     os.chdir('query-server')
     print("Deleting OLD DB file".center(TERMINAL_WIDTH, "-"))
     DB_FILE_PATH = os.path.join(os.getcwd(), "db.sqlite3")
@@ -24,14 +25,14 @@ def main():
         os.remove(os.path.join(os.getcwd(), "db.sqlite3"))
 
     print("Removing Migrations".center(TERMINAL_WIDTH, "-"))
-    if os.path.exists('flask/migrations'):
-        shutil.rmtree('flask/migrations')
+    if os.path.exists('app/migrations'):
+        shutil.rmtree('app/migrations')
 
     print("Making User Migrations".center(TERMINAL_WIDTH, "-"))
-    os.system("python {} makemigrations flask".format(os.path.join(os.getcwd(), "manage.py")))
+    os.system("{} {} makemigrations app".format(cmd[0], os.path.join(os.getcwd(), "manage.py")))
 
     print("Migrating Migrations".center(TERMINAL_WIDTH, "-"))
-    os.system("python {} migrate".format(os.path.join(os.getcwd(), "manage.py")))
+    os.system("{} {} migrate".format(cmd[0], os.path.join(os.getcwd(), "manage.py")))
 
     print("Setting up Client Server -- django server".center(TERMINAL_WIDTH, "-"))
     os.chdir('../')
@@ -43,17 +44,17 @@ def main():
         os.remove(os.path.join(os.getcwd(), "db.sqlite3"))
 
     print("Removing Migrations".center(TERMINAL_WIDTH, "-"))
-    if os.path.exists('app_django/migrations'):
-        shutil.rmtree('app_django/migrations')
+    if os.path.exists('app/migrations'):
+        shutil.rmtree('app/migrations')
 
     print("Making User Migrations".center(TERMINAL_WIDTH, "-"))
-    os.system("python {} makemigrations app_django".format(os.path.join(os.getcwd(), "manage.py")))
+    os.system("{} {} makemigrations app_django".format(cmd[0], os.path.join(os.getcwd(), "manage.py")))
 
     print("Migrating Migrations".center(TERMINAL_WIDTH, "-"))
-    os.system("python {} migrate".format(os.path.join(os.getcwd(), "manage.py")))
+    os.system("{} {} migrate".format(cmd[0], os.path.join(os.getcwd(), "manage.py")))
 
-    print("Run CLient Server".center(TERMINAL_WIDTH,"-"))
-    os.system("start python manage.py runserver 0.0.0.0:80")
+    print("Run CLient Server".center(TERMINAL_WIDTH, "-"))
+    os.system("start {} manage.py runserver 0.0.0.0:80".format(cmd[0]))
     while True:
         try:
             response = requests.get(BASE_URL_SERVER2)
@@ -64,7 +65,7 @@ def main():
     os.chdir("../query-server/")
 
     print("Run Query Server ".center(TERMINAL_WIDTH, "-"))
-    os.system("start python manage.py runserver 0.0.0.0:8000")
+    os.system("start {} manage.py runserver 0.0.0.0:8000".format(cmd[0]))
     while True:
         try:
             response = requests.get(BASE_URL_SERVER1)
@@ -72,7 +73,6 @@ def main():
         except:
             print("Reconnecting....")
 
-    flavour = platform.system()
     if flavour == 'Windows':
         print("Starting Redis Server".center(TERMINAL_WIDTH, "-"))
         os.chdir('../Redis')
