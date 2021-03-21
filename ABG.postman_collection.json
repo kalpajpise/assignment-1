@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "f3288267-24c6-42de-abc3-17323fc23d37",
+		"name": "ABG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search IFSC",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/query/search?ifsc_code=ALLA0213615",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"query",
+						"search"
+					],
+					"query": [
+						{
+							"key": "ifsc_code",
+							"value": "ALLA0213615"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank Count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/app/banklead/?sortorder=&fetchcount=abc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"app",
+						"banklead",
+						""
+					],
+					"query": [
+						{
+							"key": "sortorder",
+							"value": ""
+						},
+						{
+							"key": "fetchcount",
+							"value": "abc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/app/stats?fetchcount=1&sortorder=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"app",
+						"stats"
+					],
+					"query": [
+						{
+							"key": "fetchcount",
+							"value": "1"
+						},
+						{
+							"key": "sortorder",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "django-Search Ifsc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/api/search?ifsc_code=ALLA0213615",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "ifsc_code",
+							"value": "ALLA0213615"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "django - bank  Count",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/api/banklead?sortorder&fetchcount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"api",
+						"banklead"
+					],
+					"query": [
+						{
+							"key": "sortorder",
+							"value": null
+						},
+						{
+							"key": "fetchcount",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "django-stats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:80/api/stats?sortorder&fetchcount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"api",
+						"stats"
+					],
+					"query": [
+						{
+							"key": "sortorder",
+							"value": null
+						},
+						{
+							"key": "fetchcount",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
