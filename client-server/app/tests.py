@@ -20,6 +20,7 @@ TEST_DATA = {
                 "ifsc_code": "ALLA0213615"
             },
             "response": {
+                "message": "Successful",
                 "results": {
                     "BANK": "ALLAHABAD BANK",
                     "IFSC": "ALLA0213615",
